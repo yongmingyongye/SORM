@@ -20,7 +20,7 @@ import com.fx.sorm.utils.ReflectUtils;
  * @author Administrator
  *
  */
-public abstract class Query {
+public abstract class Query implements Cloneable {
 
 	/**
 	 * 采用模板方法模式将JDBC操作封装为模板，便于重用
@@ -308,5 +308,11 @@ public abstract class Query {
 	 * @return
 	 */
 	public abstract Object queryPagenate(int pageNum, int size);
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
 
 }

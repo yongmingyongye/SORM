@@ -35,12 +35,18 @@ public class Configuration {
 	 * 扫描生成java类的包（po的意思是：Persistence object持久化）
 	 */
 	private String poPackage;
+	
+	/**
+	 * 项目使用的查询类
+	 */
+	private String queryClass;
+	
 	public Configuration() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Configuration(String driver, String url, String user, String pwd, String usingDB, String srcPath,
-			String poPackage) {
+			String poPackage, String queryClass) {
 		super();
 		this.driver = driver;
 		this.url = url;
@@ -49,6 +55,7 @@ public class Configuration {
 		this.usingDB = usingDB;
 		this.srcPath = srcPath;
 		this.poPackage = poPackage;
+		this.queryClass = queryClass;
 	}
 	public String getDriver() {
 		return driver;
@@ -91,6 +98,12 @@ public class Configuration {
 	}
 	public void setPoPackage(String poPackage) {
 		this.poPackage = poPackage;
+	}
+	public String getQueryClass() {
+		return queryClass;
+	}
+	public void setQueryClass(String queryClass) {
+		this.queryClass = queryClass;
 	}
 	
 	
