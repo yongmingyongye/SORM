@@ -27,42 +27,6 @@ import com.fx.sorm.vo.EmpVO;
 @SuppressWarnings("all")
 public class MySqlQuery extends Query {
 	
-	public static void testDML() {
-		Emp e = new Emp();
-		e.setId(4);
-		e.setEmpname("’‘¡˘");
-		e.setSalary(new BigDecimal("15000"));
-		e.setAge(26);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			e.setBirthday(new java.sql.Date(format.parse("1994-09-01").getTime()));
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		new MySqlQuery().update(e, new String[] {"salary", "age", "birthday"});
-	}
-	
-	public static void testQueryRows() {
-		List<Emp> rows = new MySqlQuery().queryRows("select id, empname, age, salary from emp where age > ? and salary < ?", 
-				Emp.class, new Object[] {Integer.valueOf(20), new BigDecimal("15000")});
-		System.out.println(rows);
-		
-		String sql = "select e.id, e.empname, e.salary + e.bonus 'xinshui', e.age, d.dname 'deptName', d.address 'deptAddress' from emp e " + 
-				"join dept d on e.deptId = d.id";
-		List<EmpVO> rows2 = new MySqlQuery().queryRows(sql, EmpVO.class, new Object[] {});
-		for (Object obj : rows2) {
-			EmpVO e = (EmpVO) obj;
-			System.out.println(e);
-		}
-	}
-	
-	public static void main(String[] args) {
-		Object value = new MySqlQuery().queryValue("select count(*) from emp where salary > ?", new Object[] {5000});
-		System.out.println(value);
-//		testQueryRows();
-	}
-
 	@Override
 	public Object queryPagenate(int pageNum, int size) {
 		// TODO Auto-generated method stub

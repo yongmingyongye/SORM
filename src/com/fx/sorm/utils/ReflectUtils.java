@@ -37,9 +37,11 @@ public class ReflectUtils {
 	@SuppressWarnings("all")
 	public static void invokeSet(String fieldName, Object value, Object obj) {
 		try {
-			Class c = obj.getClass();
-			Method m = c.getDeclaredMethod("set" + StringUtils.firstChar2UpperCass(fieldName), value.getClass());
-			m.invoke(obj, value);
+			if (null != value) {
+				Class c = obj.getClass();
+				Method m = c.getDeclaredMethod("set" + StringUtils.firstChar2UpperCass(fieldName), value.getClass());
+				m.invoke(obj, value);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

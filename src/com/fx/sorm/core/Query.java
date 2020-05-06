@@ -309,10 +309,26 @@ public abstract class Query implements Cloneable {
 	 */
 	public abstract Object queryPagenate(int pageNum, int size);
 	
+	/**
+	 * 根据主键的值查找信息
+	 * @param clazz 表对应的类
+	 * @param id id值
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public Object queryById(Class clazz, Object id) {
+		TableInfo tableInfo = TableContext.poClassTableMap.get(clazz);
+		ColumnInfo onlyPriKey = tableInfo.getOnlyPriKey();
+		StringBuilder sql = new StringBuilder("select * from ");
+		sql.append(tableInfo.getTname()).append(" where ").append(onlyPriKey.getName()).append(" = ? ");
+		return queryUniqueRow(sql.toString(), clazz, new Object[] {id});
+	}
+	
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		return super.clone();
 	}
+	
 
 }
